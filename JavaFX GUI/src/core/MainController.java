@@ -1,98 +1,64 @@
 package core;
-
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainController
 {
-	@FXML Button Delivery;
-	@FXML Button Pickup;
-	@FXML Button EatIn;
-	@FXML Button ToGo;
+	@FXML Button XChicken;
+	@FXML Button YChicken;
+	@FXML Button ZChicken;
+	@FXML ListView CurrentOrder;
+	@FXML Label displayPriecTotal;
 
-	@FXML Button Record;
+	List<Float> priceList = new ArrayList<>();
 
-	@FXML Button Report;
-	@FXML Button Info;
-	@FXML Button Settings;
-
-	byte deliveryType = 0;
-	byte toGoType = 1;
-	byte pickupType = 2;
-	byte eatInType = 3;
-	@FXML private void Order(byte orderType)
+	public void addItem(String foodName)
 	{
-//		switch (orderType)
-//		{
-//			case (0):
-//			{
-//
-//				break;
-//			}
-//
-//			case (1):
-//			{
-//
-//				break;
-//			}
-//
-//			case (2):
-//			{
-//
-//				break;
-//			}
-//
-//			case (3):
-//			{
-//
-//				break;
-//			}
-//
-//			default:
-//			{
-//
-//				break;
-//			}
-//		}
-		try
+		ObservableList<String> foodList = CurrentOrder.getItems();
+		foodList.add(foodName);
+		CurrentOrder.setItems(foodList);
+	}
+
+	public void addPrice(float price)
+	{
+		priceList.add(price);
+		updatePriceTotal();
+	}
+
+	public float priceTotal()
+	{
+		float totalPrice = 0;
+		for(float foodPrice : priceList)
 		{
-			Stage settings = new Stage(); //opens a new stage for the OrderWindow
-			settings.setTitle("Order"); //sets title
-			//settings.getIcons().add(new Image("core/icon.png")); //sets icon
-			settings.setScene(new Scene(FXMLLoader.load(getClass().getResource("OrderWindow.fxml")))); //sets GUI file
-			settings.setAlwaysOnTop(true); //sets OrderWindow to always show on top of desktop (until closed)
-			settings.show(); //shows the OrderWindow
+			totalPrice+=foodPrice;
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			//new Tracer(e).showAlert();
-		}
-
+		return totalPrice;
 	}
-	@FXML private void Delivery()
+
+	public void updatePriceTotal()
 	{
-		//call a new Window
-		Order(deliveryType);
+		displayPriecTotal.setText(((Float)priceTotal()).toString());
 	}
-	@FXML private void ToGo()
+
+	public void onXChicken()
 	{
-		Order(toGoType);
-
+		addItem("X Chicken");
 	}
-	@FXML private void Pickup()
+
+	public void onYChicken()
 	{
-		Order(pickupType);
-
+		addItem("Y Chicken");
 	}
-	@FXML private void EatIn()
+
+	public void onZChicken()
 	{
-		Order(eatInType);
-
+		addItem("Z Chicken");
 	}
-
 }
