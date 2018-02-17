@@ -1,11 +1,10 @@
 package core;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
+import javafx.scene.control.TextField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,8 @@ public class MainController
 	@FXML Button YChicken;
 	@FXML Button ZChicken;
 	@FXML ListView CurrentOrder;
-	@FXML Label displayPriecTotal;
+	@FXML TextField displaySubTotal;
+	@FXML TextField displayTotal;
 
 	List<Float> priceList = new ArrayList<>();
 
@@ -44,21 +44,31 @@ public class MainController
 
 	public void updatePriceTotal()
 	{
-		displayPriecTotal.setText(((Float)priceTotal()).toString());
+		displaySubTotal.setEditable(true);
+		displaySubTotal.setText(((Float)priceTotal()).toString());
+		displaySubTotal.setEditable(false);
+
+		displayTotal.setEditable(true);
+		displayTotal.setText(((Float)(priceTotal()* (float) 1.06)).toString());
+		displayTotal.setEditable(false);
+
 	}
 
 	public void onXChicken()
 	{
 		addItem("X Chicken");
+		addPrice((float) 5.00);
 	}
 
 	public void onYChicken()
 	{
 		addItem("Y Chicken");
+		addPrice((float) 5.50);
 	}
 
 	public void onZChicken()
 	{
 		addItem("Z Chicken");
+		addPrice((float) 6.00);
 	}
 }
