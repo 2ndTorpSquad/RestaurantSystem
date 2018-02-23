@@ -1,4 +1,4 @@
-package core;
+package RestaurantSystem_change;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

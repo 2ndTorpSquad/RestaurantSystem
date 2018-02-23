@@ -1,4 +1,4 @@
-package core;
+package RestaurantSystem_change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,12 +10,10 @@ import java.util.List;
 
 public class MainController
 {
-	@FXML Button XChicken;
-	@FXML Button YChicken;
-	@FXML Button ZChicken;
-	@FXML ListView CurrentOrder;
-	@FXML TextField displaySubTotal;
-	@FXML TextField displayTotal;
+	@FXML ListView ;
+	@FXML ListView ;
+	@FXML Button Add;
+	
 
 	List<Float> priceList = new ArrayList<>();
 
@@ -60,15 +58,4 @@ public class MainController
 		addPrice((float) 5.00);
 	}
 
-	public void onYChicken()
-	{
-		addItem("Y Chicken");
-		addPrice((float) 5.50);
-	}
-
-	public void onZChicken()
-	{
-		addItem("Z Chicken");
-		addPrice((float) 6.00);
-	}
 }
